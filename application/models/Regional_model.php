@@ -2,6 +2,19 @@
 
 class Regional_model extends CI_Model {
 
+## --- DESA/KELURAHAN ---
+public function getListDesaByName($desa)
+{
+  $this->db->distinct();
+  $this->db->like('name', $desa);
+  $this->db->join('regional_kecamatan c','c.id=d.district_id', 'left');
+  $this->db->join('regional_kabkota k','k.id=c.regency_id', 'left');
+  $this->db->join('regional_propinsi p','p.id=k.provence_id', 'left');
+  $query = $this->db->get('regional_desa d');
+  return $query->result();
+}
+
+## --- KODE POS ---
   public function getKodePosByDesa($desa)
   {
     $this->db->distinct();

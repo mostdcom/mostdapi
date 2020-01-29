@@ -35,7 +35,7 @@ class Regional extends REST_Controller {
       ], REST_Controller::HTTP_BAD_REQUEST);
     } else {
       $desa = $this->regional_model->getListDesaByName( $search );
-      $this->response( $desa, REST_Controller::HTTP_OK );
+      $this->response( ['desa'=> $desa ], REST_Controller::HTTP_OK );
     }
   }
 

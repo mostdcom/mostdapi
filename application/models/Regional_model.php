@@ -6,7 +6,7 @@ class Regional_model extends CI_Model {
 public function getListDesaByName($desa)
 {
   $this->db->distinct();
-  $this->db->like('name', $desa);
+  $this->db->like('d.name', $desa);
   $this->db->join('regional_kecamatan c','c.id=d.district_id', 'left');
   $this->db->join('regional_kabkota k','k.id=c.regency_id', 'left');
   $this->db->join('regional_propinsi p','p.id=k.provence_id', 'left');

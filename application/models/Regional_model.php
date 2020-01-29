@@ -9,7 +9,7 @@ public function getListDesaByName($desa)
   $this->db->like('d.name', $desa);
   $this->db->join('regional_kecamatan c','c.id=d.district_id', 'left');
   $this->db->join('regional_kabkota k','k.id=c.regency_id', 'left');
-  $this->db->join('regional_propinsi p','p.id=k.provence_id', 'left');
+  $this->db->join('regional_propinsi p','p.id=k.province_id', 'left');
   $query = $this->db->get('regional_desa d');
   return $query->result();
 }

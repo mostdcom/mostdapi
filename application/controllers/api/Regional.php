@@ -51,11 +51,11 @@ class Regional extends REST_Controller {
     if(!$search){
       $this->response([
           'status' => FALSE,
-          'message' => 'tidak ada keyword untuk pencarian desa/kelurahan'
+          'message' => 'berikan kata kunci untuk pencarian desa/kelurahan'
       ], REST_Controller::HTTP_BAD_REQUEST);
     } else {
       $kodepos = $this->regional_model->getKodePosByDesa( $search );
-      $this->response( $kodepos, REST_Controller::HTTP_OK );
+      $this->response( ['kodepos' => $kodepos], REST_Controller::HTTP_OK );
     }
   }
 
@@ -70,7 +70,7 @@ class Regional extends REST_Controller {
       ], REST_Controller::HTTP_BAD_REQUEST);
     } else {
       $kodepos = $this->regional_model->getKodePosByIdDesa( $search );
-      $this->response( $kodepos, REST_Controller::HTTP_OK );
+      $this->response( ['kodepos'=>$kodepos], REST_Controller::HTTP_OK );
     }
   }
 

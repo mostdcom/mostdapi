@@ -34,7 +34,24 @@ class Regional extends REST_Controller {
           'message' => 'berikan kata kunci untuk pencarian desa/kelurahan'
       ], REST_Controller::HTTP_BAD_REQUEST);
     } else {
-      $desa = $this->regional_model->getListDesaByName( $search );
+      $desa = $this->regional_model->getListDesa( $search );
+      $this->response( ['desa'=> $desa ], REST_Controller::HTTP_OK );
+    }
+  }
+
+  public function desabyid_get()
+  {
+    $search = $this->get('id_desa');
+    if(!$search) {
+      $search = $this->get('id_kelurahan');
+    }
+    if(!$search){
+      $this->response([
+          'status' => FALSE,
+          'message' => 'berikan nomor id desa/kelurahan untuk pencarian'
+      ], REST_Controller::HTTP_BAD_REQUEST);
+    } else {
+      $desa = $this->regional_model->getListDesa( $search, TRUE );
       $this->response( ['desa'=> $desa ], REST_Controller::HTTP_OK );
     }
   }

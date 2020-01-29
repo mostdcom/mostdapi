@@ -3,12 +3,16 @@
 class Regional_model extends CI_Model {
 
 ## --- DESA/KELURAHAN ---
-public function getListDesaByName($desa)
+public function getListDesa($desa, $byId=FALSE)
 {
   $this->db->distinct();
   $this->db->select('d.id id_desa, d.name nama_desa, c.id id_kecamatan, c.name nama_kecamatan');
   $this->db->select('k.id id_kabkota, k.name nama_kabkota, p.id id_propinsi, p.nama nama_propinsi');
-  $this->db->like('d.name', $desa);
+  if( $byId ){
+    $this->db->where('d.id', $desa);
+  } else {
+    $this->db->like('d.name', $desa);
+  }
   $this->db->join('regional_kecamatan c','c.id=d.district_id', 'left');
   $this->db->join('regional_kabkota k','k.id=c.regency_id', 'left');
   $this->db->join('regional_propinsi p','p.id=k.province_id', 'left');

@@ -20,6 +20,10 @@ class Regional extends REST_Controller {
     	$this->load->model('regional_model');
     }
 
+
+
+##--- LAYANAN KODE POS ---
+
     public function kodepos_get()
     {
       $search = $this->get('desa');
@@ -34,6 +38,21 @@ class Regional extends REST_Controller {
         ], REST_Controller::HTTP_BAD_REQUEST);
       } else {
         $kodepos = $this->regional_model->getKodePosByDesa( $search );
+        $this->response( $kodepos, REST_Controller::HTTP_OK );
+      }
+    }
+
+    public function kodeposbyid_get()
+    {
+      $search = $this->get('id_desa');
+
+      if(!$search){
+        $this->response([
+            'status' => FALSE,
+            'message' => 'id_desa dibutuhkan untuk pencarian desa/kelurahan'
+        ], REST_Controller::HTTP_BAD_REQUEST);
+      } else {
+        $kodepos = $this->regional_model->getKodePosByIdDesa( $search );
         $this->response( $kodepos, REST_Controller::HTTP_OK );
       }
     }
